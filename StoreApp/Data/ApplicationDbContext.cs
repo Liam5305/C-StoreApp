@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using StoreApp.Models;
 
 namespace StoreApp.Data
 {
@@ -9,5 +10,6 @@ namespace StoreApp.Data
             : base(options)
         {
         }
+        public DbSet<StoreApp.Models.Item> Item { get; set; } = default!;
     }
 }
