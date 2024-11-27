@@ -1,4 +1,6 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿function DisplayDateOnHome() {
+    const today = new Date();
+    document.getElementById('currentDate').textContent = today.toLocaleDateString();
+}
 
-// Write your JavaScript code.
+window.onload = DisplayDateOnHome;
