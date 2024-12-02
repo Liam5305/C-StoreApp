@@ -11,5 +11,6 @@ namespace StoreApp.Data
         {
         }
         public DbSet<StoreApp.Models.Item> Item { get; set; } = default!;
+        public DbSet<StoreApp.Models.Users> Users { get; set; } = default!;
     }
 }

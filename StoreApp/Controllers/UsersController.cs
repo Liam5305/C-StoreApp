@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,22 +10,22 @@ using StoreApp.Models;
 
 namespace StoreApp.Controllers
 {
-    public class ItemsController : Controller
+    public class UsersController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ItemsController(ApplicationDbContext context)
+        public UsersController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Items
+        // GET: Users
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Item.ToListAsync());
+            return View(await _context.Users.ToListAsync());
         }
 
-        // GET: Items/Details/5
+        // GET: Users/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,41 +33,45 @@ namespace StoreApp.Controllers
                 return NotFound();
             }
 
-            var item = await _context.Item
+            var users = await _context.Users
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (item == null)
+            if (users == null)
             {
                 return NotFound();
             }
 
-            return View(item);
+            return View(users);
         }
 
-        [Authorize]
-        // GET: Items/Create
+        // GET: Users/create-new-user
+        public IActionResult CreateNew()
+        {
+            return View();
+        }
+
+        // GET: Users/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Items/Create
+        // POST: Users/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Retailer,Description,Title")] Item item)
+        public async Task<IActionResult> Create([Bind("Id,Name,Email,Username")] Users users)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(item);
+                _context.Add(users);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(item);
+            return View(users);
         }
 
-        [Authorize]
-        // GET: Items/Edit/5
+        // GET: Users/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -76,22 +79,22 @@ namespace StoreApp.Controllers
                 return NotFound();
             }
 
-            var item = await _context.Item.FindAsync(id);
-            if (item == null)
+            var users = await _context.Users.FindAsync(id);
+            if (users == null)
             {
                 return NotFound();
             }
-            return View(item);
+            return View(users);
         }
 
-        // POST: Items/Edit/5
+        // POST: Users/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Retailer,Description,Title")] Item item)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Email,Username")] Users users)
         {
-            if (id != item.Id)
+            if (id != users.Id)
             {
                 return NotFound();
             }
@@ -100,12 +103,12 @@ namespace StoreApp.Controllers
             {
                 try
                 {
-                    _context.Update(item);
+                    _context.Update(users);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ItemExists(item.Id))
+                    if (!UsersExists(users.Id))
                     {
                         return NotFound();
                     }
@@ -116,10 +119,10 @@ namespace StoreApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(item);
+            return View(users);
         }
-        [Authorize]
-        // GET: Items/Delete/5
+
+        // GET: Users/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -127,34 +130,34 @@ namespace StoreApp.Controllers
                 return NotFound();
             }
 
-            var item = await _context.Item
+            var users = await _context.Users
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (item == null)
+            if (users == null)
             {
                 return NotFound();
             }
 
-            return View(item);
+            return View(users);
         }
 
-        // POST: Items/Delete/5
+        // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var item = await _context.Item.FindAsync(id);
-            if (item != null)
+            var users = await _context.Users.FindAsync(id);
+            if (users != null)
             {
-                _context.Item.Remove(item);
+                _context.Users.Remove(users);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ItemExists(int id)
+        private bool UsersExists(int id)
         {
-            return _context.Item.Any(e => e.Id == id);
+            return _context.Users.Any(e => e.Id == id);
         }
     }
 }
