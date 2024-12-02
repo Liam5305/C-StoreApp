@@ -27,7 +27,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.AdminAccess)
             </th>
-            <th></th>
+            <th>Action:</th>
         </tr>
     </thead>
     <tbody>
@@ -45,11 +45,16 @@
             <td>
                 @Html.DisplayFor(modelItem => item.AdminAccess)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
+            @if (User.Identity.IsAuthenticated)
+                    {
+                        <td>
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    }
+                    else
+                    {
+                    <td>Not logged in!</td>
+                    }
         </tr>
 }
     </tbody>

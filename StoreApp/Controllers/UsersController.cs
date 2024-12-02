@@ -49,18 +49,18 @@ namespace StoreApp.Controllers
             return View();
         }
 
-        // GET: Users/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
+        //// GET: Users/Create
+        //public IActionResult Create()
+        //{
+        //    return View();
+        //}
 
         // POST: Users/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Email,Username")] Users users)
+        public async Task<IActionResult> CreateNew([Bind("Id,Name,Email,Username")] Users users)
         {
             if (ModelState.IsValid)
             {

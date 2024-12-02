@@ -4,73 +4,47 @@
     ViewData["Title"] = "Index";
 }
 
-<div class="admin-create-item">
-<h1>Store</h1>
-    @if (User.Identity.IsAuthenticated)
-    {
-        <p>
-            <a asp-action="Create">Add New</a>
-        </p>
-    }
-</div>
+<div class="store-container">
+    <div class="page-header">
+        <h1>Store</h1>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="admin-create-item">
+                <a asp-action="Create" class="btn-primary">
+                    <i class="fas fa-plus"></i> Add New
+                </a>
+            </div>
+        }
+    </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Retailer)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) 
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Retailer)
-            </td>
-            @if (User.Identity.IsAuthenticated)
-                {
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    </td>
-                }
-        </tr>
-    }
-    </tbody>
-</table>
-
-<div class="article-content">
-    <article>
-        <p>
-            Lorem ipsum odor amet, consectetuer adipiscing elit. Ridiculus curae vehicula at gravida suscipit nostra inceptos mi. Velit sit vulputate aliquet imperdiet augue tortor amet at! Habitant commodo pulvinar diam pellentesque est efficitur nisl laoreet. Consectetur eros ultrices augue dapibus magnis. Montes congue sociosqu class luctus potenti orci hendrerit. Senectus integer ipsum tempus vestibulum nibh tempus efficitur. Inceptos risus odio tincidunt dignissim feugiat. Cursus suspendisse aliquet arcu ex molestie. Class nisi integer pretium parturient mollis?
-
-            Porta ornare elementum nec inceptos potenti sodales gravida morbi. Vulputate class felis volutpat netus dui. Quis semper vestibulum purus pharetra natoque. Sem eu sollicitudin tincidunt semper hendrerit habitasse purus mollis. Scelerisque purus ultrices in id ultrices sollicitudin libero hendrerit. Platea per porttitor porta eleifend per primis ad. Nascetur gravida maximus ac quis inceptos semper risus. Hendrerit proin erat ligula tincidunt, laoreet placerat dictum. Morbi penatibus parturient molestie eleifend nulla? Vivamus feugiat sit bibendum leo lacus tellus.
-
-            Per cursus fames mauris nibh habitant. Sodales per pellentesque interdum morbi elit praesent nostra efficitur ornare. Sapien gravida himenaeos inceptos natoque dis tortor. Luctus ultrices commodo mauris nostra himenaeos mi. Scelerisque leo nulla; ultricies montes laoreet curabitur maecenas. Integer sollicitudin ultrices scelerisque condimentum sem odio turpis tristique euismod. Mi penatibus adipiscing ridiculus; neque conubia eros.
-
-            Vestibulum maximus adipiscing dui facilisis cursus tincidunt libero ullamcorper. Turpis taciti imperdiet platea felis dictum donec. Ridiculus velit imperdiet ligula dis curae. Nisl leo finibus odio netus sapien potenti consequat luctus ante. Pellentesque conubia nam massa nullam magnis convallis purus eleifend at. Libero nunc magnis sociosqu phasellus pharetra integer ex. Habitant suscipit viverra vitae duis iaculis nibh parturient dictumst. Rutrum lacinia pharetra amet ligula efficitur platea neque nulla.
-
-            Bibendum vehicula elementum efficitur; nam magna blandit. Urna purus tempor libero euismod luctus luctus, euismod primis ultrices. Duis integer vitae sodales donec potenti amet aliquet. Porttitor per quam fringilla; ad conubia platea. Class integer primis nisi praesent pulvinar vulputate gravida. Donec placerat aptent vitae torquent erat, augue suspendisse sem. Fermentum bibendum maecenas amet, nisi nisi finibus. Gravida per fames euismod donec ligula erat maecenas pharetra. Ornare felis nostra hendrerit dolor maximus libero. Ut porttitor eget rutrum gravida aliquet velit mus.
-
-            Ad class fermentum gravida tellus lacus himenaeos. Dolor iaculis egestas mollis sociosqu nisi quisque nostra donec. Eu efficitur litora taciti ullamcorper ullamcorper platea sit. Malesuada ex sagittis diam ultricies maecenas faucibus. Erat cubilia arcu purus varius pulvinar. Magnis augue magna porttitor risus magna quisque lectus hac. Primis imperdiet rhoncus ullamcorper vehicula porttitor tristique dignissim.
-
-            Non malesuada class interdum augue gravida malesuada habitant. Placerat adipiscing dapibus ligula ligula finibus pretium dictumst aptent. Adipiscing fringilla feugiat porttitor nisl, semper quam sem finibus posuere. Class tristique odio semper, finibus posuere turpis. Porta rutrum nulla urna purus egestas integer inceptos? Pretium ornare facilisis morbi sagittis; pharetra consectetur pulvinar.
-        </p>
-    </article>
+    <div class="grid-container">
+        @foreach (var item in Model)
+        {
+            <div class="item-card">
+                <div class="item-header">
+                    <h3>@item.Title</h3>
+                    <span class="retailer">@item.Retailer</span>
+                </div>
+                <p class="description">@item.Description</p>
+                <div class="item-actions">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn-action">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn-action">
+                            <i class="fas fa-info-circle"></i> Details
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn-action delete">
+                            <i class="fas fa-trash"></i> Delete
+                        </a>
+                    }
+                    else
+                    {
+                        <span class="login-note">Not logged in!</span>
+                    }
+                </div>
+            </div>
+        }
+    </div>
 </div>
