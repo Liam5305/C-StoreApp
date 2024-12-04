@@ -18,34 +18,43 @@
     </div>
 
     <div class="user-container">
-        @foreach (var item in Model)
+    @if (!Model.Any())
         {
-            <div class="user-card">
-                <div class="card-header">
-                    <h2>@item.Username</h2>
-                </div>
+            <div class="no-items-avail">
+                <p>Users are stored on a Local SQL Database, cannot be shown on the live server.</p>
+            </div>
+        }
+        else
+        {
+            @foreach (var item in Model)
+            {
+                <div class="user-card">
+                    <div class="card-header">
+                        <h2>@item.Username</h2>
+                    </div>
                     <span class="Email">Email: @item.Email</span>
                     <span class="Name">First Name: @item.Name</span>
-                <div class="user-actions">
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn-action">
-                            <i class="fas fa-edit"></i> Edit
-                        </a>
-                        <a asp-action="Details" asp-route-id="@item.Id" class="btn-action">
-                            <i class="fas fa-info-circle"></i> Details
-                        </a>
-                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn-action delete">
-                            <i class="fas fa-trash"></i> Delete
-                        </a>
-                    }
-                    else
-                    {
-                        <span class="login-note">Not logged in!</span>
-                    }
+                    <div class="user-actions">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn-action">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn-action">
+                                <i class="fas fa-info-circle"></i> Details
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn-action delete">
+                                <i class="fas fa-trash"></i> Delete
+                            </a>
+                        }
+                        else
+                        {
+                            <span class="login-note">Not logged in!</span>
+                        }
+                    </div>
+
                 </div>
-                
-            </div>
+            }
         }
     </div>
 </div>

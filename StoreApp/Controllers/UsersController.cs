@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using StoreApp.Data;
 using StoreApp.Models;
 
@@ -13,16 +14,27 @@ namespace StoreApp.Controllers
     public class UsersController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _environment;
 
-        public UsersController(ApplicationDbContext context)
+        public UsersController(ApplicationDbContext context, IWebHostEnvironment environment)
         {
             _context = context;
+            _environment = environment;
         }
 
         // GET: Users
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Users.ToListAsync());
+            //return View(await _context.Users.ToListAsync());
+
+            var currentEnvironment = _environment.EnvironmentName;
+
+            if (_environment.IsDevelopment())
+            {
+                return View(await _context.Users.ToListAsync());
+            }
+
+            return View(new List<Item>());
         }
 
         // GET: Users/Details/5
