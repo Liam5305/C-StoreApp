@@ -6,10 +6,9 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["StoreApp/StoreApp.csproj", "StoreApp/"]
-RUN dotnet restore "./StoreApp/StoreApp.csproj"
+COPY ["StoreApp.csproj", "./"]
+RUN dotnet restore "./StoreApp.csproj"
 COPY . .
-WORKDIR "/src/StoreApp"
 RUN dotnet build "StoreApp.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
