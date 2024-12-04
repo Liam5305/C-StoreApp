@@ -119,6 +119,7 @@ body {
     grid-template-columns: repeat(auto-fill, minmax(300px, lfr));
     gap: 1.5rem;
     margin-bottom: 2rem;
+    height: 100%;
 }
 
 .item-card-notavail {
@@ -142,7 +143,15 @@ body {
 
     #no-items-header {
         background-color: red;
-        box-shadow: 10px 10px rgba(0,0,0,0.2);
+        box-shadow: 5px 5px rgba(0,0,0,0.2);
+        padding: 5px 5px 5px 5px;
+        border-radius: 7px;
+        height: 2.5rem;
+    }
+
+    #no-items-header h3 {
+        color: white;
+        font-weight: bold;
     }
 
 .grid-container {
