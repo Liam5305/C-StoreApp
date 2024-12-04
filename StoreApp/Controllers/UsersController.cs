@@ -34,7 +34,7 @@ namespace StoreApp.Controllers
                 return View(await _context.Users.ToListAsync());
             }
 
-            return View(new List<Item>());
+            return View(new List<Users>());
         }
 
         // GET: Users/Details/5
