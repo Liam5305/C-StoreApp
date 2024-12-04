@@ -134,7 +134,9 @@ body {
     }
 
     .item-card-notavail p {
-        font-size: 10px;
+        font-size: 20px;
+        text-transform: capitalize;
+        color: red;
         text-decoration: underline;
     }
 
