@@ -8,22 +8,35 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using StoreApp.Data;
 using StoreApp.Models;
+using Microsoft.AspNetCore.Hosting;
 
 namespace StoreApp.Controllers
 {
     public class ItemsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _environment;
 
-        public ItemsController(ApplicationDbContext context)
+        public ItemsController(ApplicationDbContext context, IWebHostEnvironment environment)
         {
             _context = context;
+            _environment = environment;
         }
 
         // GET: Items
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Item.ToListAsync());
+            //return View(await _context.Item.ToListAsync());
+
+            var currentEnvironment = _environment.EnvironmentName;
+
+            if (_environment.IsDevelopment())
+            {
+                return View(await _context.Item.ToListAsync());
+            }
+
+            return View(new List<Item>());
+
         }
 
         // GET: Items/Details/5
