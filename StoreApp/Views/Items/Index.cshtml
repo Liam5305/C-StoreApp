@@ -21,8 +21,11 @@
     @if (!Model.Any())
         {
             <div class="no-items-avail">
-                <div class="item-card-notavail">
-                    <p>Items are stored on a Local SQL Database, cannot be shown on the live server.</p>
+                <div id="no-items-header">
+                    <h3>Error:</h3>
+                    <div class="item-card-notavail">
+                        <p>Items are stored on a Local SQL Database, cannot be shown on the live server.</p>
+                    </div>
                 </div>
             </div>
         }
