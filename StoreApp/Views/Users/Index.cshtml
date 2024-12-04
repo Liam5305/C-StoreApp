@@ -1,61 +1,51 @@
 ﻿@model IEnumerable<StoreApp.Models.Users>
-
 @{
     ViewData["Title"] = "Index";
 }
+<div class="store-container">
+    <div class="page-header">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <h1>User Management</h1>
+            <p>
+                <a asp-action="CreateNew">Create New</a>
+            </p>
+        }
+        else
+        {
+            <h1>Users</h1>
+        }
+    </div>
 
-<h1>Index</h1>
-
-@if (User.Identity.IsAuthenticated)
-{
-    <p>
-        <a asp-action="CreateNew">Create New</a>
-    </p>
-}
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Username)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AdminAccess)
-            </th>
-            <th>Action:</th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Username)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AdminAccess)
-            </td>
-            @if (User.Identity.IsAuthenticated)
+    <div class="user-container">
+        @foreach (var item in Model)
+        {
+            <div class="user-card">
+                <div class="card-header">
+                    <h2>@item.Username</h2>
+                </div>
+                    <span class="Email">Email: @item.Email</span>
+                    <span class="Name">First Name: @item.Name</span>
+                <div class="user-actions">
+                    @if (User.Identity.IsAuthenticated)
                     {
-                        <td>
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                        </td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn-action">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn-action">
+                            <i class="fas fa-info-circle"></i> Details
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn-action delete">
+                            <i class="fas fa-trash"></i> Delete
+                        </a>
                     }
                     else
                     {
-                    <td>Not logged in!</td>
+                        <span class="login-note">Not logged in!</span>
                     }
-        </tr>
-}
-    </tbody>
-</table>
+                </div>
+                
+            </div>
+        }
+    </div>
+</div>
