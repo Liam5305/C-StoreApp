@@ -57,9 +57,9 @@ function greetingMessage() {
     let greeting;
     if (timeOfDay <= 11) {
         greeting = "Good Morning!";
-    } else if (timeOfDay >= 12 && timeOfDay <= 15) {
+    } else if (timeOfDay >= 12 && timeOfDay <= 14) {
         greeting = "Good Afternoon!";
-    } else if (timeOfDay > 15 && timeOfDay < 20) {
+    } else if (timeOfDay >= 15 && timeOfDay <= 20) {
         greeting = "Good Evening!";
     } else {
         greeting = "Good Night!";
