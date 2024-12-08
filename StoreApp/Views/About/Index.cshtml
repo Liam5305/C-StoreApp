@@ -7,6 +7,8 @@
         <h1 class="header-text">About Us</h1>
         <h3 class="header-subtitle">What is ASP.NET?</h3>
         <div id="greetingMessage" class="greeting-msg"></div>
+        @*  <h2>It's the @(((int)DateTime.Now.DayOfWeek <= 5 && DateTime.Now.DayOfWeek != 0) ? "Weekday" : "Weekend")!</h2> *@
+        <h4>@(((int)DateTime.Now.DayOfWeek <= 5 && DateTime.Now.DayOfWeek != 0) ? "Its a Weekday :(" : "It's the Weekend :D")!</h4>
 @*         <div id="currentDate" class="date-badge"></div>
  *@    </header>
 </div>
