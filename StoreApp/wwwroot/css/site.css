@@ -11,9 +11,10 @@ html {
 
 body {
     margin-bottom: 60px;
-    background-color: var(--bg-color);
+    background-color: var(--background-color);
     color: var(--text-color);
     line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .navbar-brand {
@@ -412,3 +413,58 @@ body {
     #greetingMessage:hover {
         transform: scale(1.1);
     }
+
+/*AI Generated Below*/
+:root {
+    --background-color: #ffffff;
+    --text-color: #000000;
+    --header-color: #000000;
+    --card-bg: #ffffff;
+    --card-border: #e5e7eb;
+    --button-bg: #2563eb;
+    --button-text: #ffffff;
+}
+
+    :root[data-theme="dark"] {
+        --background-color: #121212;
+        --text-color: #ffffff;
+        --header-color: #ffffff;
+        --card-bg: #1e1e1e;
+        --card-border: #333333;
+        --button-bg: #3b82f6;
+        --button-text: #ffffff;
+    }
+
+/* Base elements */
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--header-color);
+}
+
+/* Feature cards */
+.feature-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    color: var(--text-color);
+}
+
+/* Theme toggle button */
+#themeToggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background: var(--background-color);
+    color: var(--text-color);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: all 0.3s ease;
+}

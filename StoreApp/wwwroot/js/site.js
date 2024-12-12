@@ -68,9 +68,55 @@ function greetingMessage() {
     document.getElementById("greetingMessage").innerHTML = greeting;
 }
 
+// AI Generated Below
+function createThemeButton() {
+    const button = document.createElement('button');
+    button.id = 'themeToggle';
+    button.innerHTML = '🌙';
+    document.body.appendChild(button);
+    return button;
+}
+
+function initializeTheme() {
+    const themeButton = createThemeButton();
+
+    const savedTime = localStoage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', initialTheme);
+    themeButton.innerHTML = initialTheme === 'dark' ? '☀' : '🌙';
+
+    themeButton.addEventListener('click', toggleTheme);
+}
+
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+
+    const themeButton = document.getElementById('themeToggle');
+    if (themeButton) {
+        themeButton.innerHTML = newTheme === 'dark' ? '☀' : '🌙';
+    }
+}
+function initTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+
+    document.documentElement.setAttribute('data-theme', theme);
+    createThemeToggle();
+}
+
+// AI Generated Stopped
+
 window.onload = () => {
     DisplayDateOnHome();
     addRotationEffect('.main-content h1', '.admin-create-item p');
     addEnlargeEffect('.article-content p');
     greetingMessage();
+    initTheme();
 };
